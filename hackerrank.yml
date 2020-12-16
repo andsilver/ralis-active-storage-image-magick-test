@@ -1,0 +1,17 @@
+---
+version: 1.0
+configuration:
+  has_webserver: true
+  readonly_paths:
+    - spec/*
+  scoring:
+    command: bin/env_setup && source ~/.rvm/scripts/rvm && rvm use 2.7.1 && bin/bundle install && RAILS_ENV=test bin/rails db:migrate && RAILS_ENV=test bin/bundle exec rspec
+    files:
+      - reports/report.xml
+  ide_config:
+    default_open_files:
+      - Gemfile
+    project_menu:
+      run: bin/bundle exec rails server --binding 0.0.0.0 --port 8000
+      install: bin/env_setup && source ~/.rvm/scripts/rvm && rvm --default use 2.7.1 && bin/bundle install
+      test: RAILS_ENV=test bin/rails db:migrate && RAILS_ENV=test bin/bundle exec rspec

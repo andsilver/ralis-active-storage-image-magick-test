@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -e
+
+RUBY_VERSION=${1:-"ruby-2.7.1"}
+RAILS_VERSION=${2:-"~>6.0"}
+
+# Install rvm if not already present
+if ! rvm_loc="$(type -p rvm)" || [[ -z $rvm_loc ]]; then
+  sudo gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+  \curl -sSL https://get.rvm.io | bash -s stable
+  source ~/.rvm/scripts/rvm
+fi
+
+if [ -z "$( rvm list strings | grep $RUBY_VERSION )" ]; then
+  source ~/.rvm/scripts/rvm
+
+  # Add these two lines back if RVM update is also required
+  # rvm get stable
+  # rvm reload
+
+  rvm install $RUBY_VERSION
+  rvm --default use $RUBY_VERSION
+fi
+
+if ! gem list -ie rails -v "$RAILS_VERSION"; then
+  # Double check if script is invoked in the same session without changing default
+  source ~/.rvm/scripts/rvm
+  rvm --default use $RUBY_VERSION
+
+  if ! gem list -ie rails -v "$RAILS_VERSION"; then
+    gem install rails -v "$RAILS_VERSION" --no-document
+  fi
+fi
+
+sudo apt update
+sudo apt install -y imagemagick
+export RUBYOPT='-W:no-deprecated'
