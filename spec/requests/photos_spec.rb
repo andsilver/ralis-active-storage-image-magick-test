@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'PhotosControllerController', type: :request do
+describe 'PhotosController', type: :request do
   describe 'POST /photos' do
     let(:caption) { 'Image caption' }
     let(:image_path) { 'files/296x277.jpg' }
