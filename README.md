@@ -1,29 +1,4 @@
 # Rails REST API for images
-
-## Project Specifications
-
-**Read-Only Files**
-- spec/*
-
-**Environment**  
-
-- Ruby version: 2.7.1
-- Rails version: 6.0.2
-- Default Port: 8000
-
-**Commands**
-- run: 
-```bash
-bin/bundle exec rails server --binding 0.0.0.0 --port 8000
-```
-- install: 
-```bash
-bin/env_setup && source ~/.rvm/scripts/rvm && rvm --default use 2.7.1 && bin/bundle install
-```
-- test: 
-```bash
-RAILS_ENV=test bin/rails db:migrate && RAILS_ENV=test bin/bundle exec rspec
-```
     
 ## Description
 
@@ -38,7 +13,6 @@ The structure of a photo:
 * id: The unique ID of the photo.
 * caption: The caption for the photo.
 * image: The path to the actual image file.
-
 
 ## Requirements:
 
@@ -104,4 +78,29 @@ Response:
     "avatar": "/rails/active_storage/representations/eyJfFb...HMi/2.png"
   },
 ]
+```
+
+## Project Specifications
+
+**Read-Only Files**
+- spec/*
+
+**Environment**  
+
+- Ruby version: 2.7.1
+- Rails version: 6.0.2
+- Default Port: 8000
+
+**Commands**
+- run: 
+```bash
+bin/bundle exec rails server --binding 0.0.0.0 --port 8000
+```
+- install: 
+```bash
+bin/env_setup && source ~/.rvm/scripts/rvm && rvm --default use 2.7.1 && bin/bundle install
+```
+- test: 
+```bash
+RAILS_ENV=test bin/rails db:migrate && RAILS_ENV=test bin/bundle exec rspec
 ```
